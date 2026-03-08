@@ -376,20 +376,13 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   box-shadow: var(--shadow-accent);
 }
 
-.avatar-inner {
+.avatar-img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
 .avatar-badges {
@@ -516,6 +509,17 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-weight: 600;
   margin-top: 0.25rem;
 }
+
+.card-cert-link {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-2);
+  margin-top: 0.3rem;
+  transition: color var(--transition);
+}
+
+.card-cert-link:hover { color: var(--accent); }
 
 .card-supervisor {
   font-size: 0.85rem;
