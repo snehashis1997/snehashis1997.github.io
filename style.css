@@ -877,6 +877,10 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 
 /* ---------- HOBBIES ---------- */
+#hobbies .container {
+  width: min(1600px, 95%);
+}
+
 #hobbies .contact-cards {
   grid-template-columns: minmax(240px, 320px);
 }
@@ -902,7 +906,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .gallery-item img {
   width: 100%;
   height: auto;
-  max-height: 210px;
+  max-height: 315px;
   object-fit: contain;
   display: block;
   cursor: pointer;
