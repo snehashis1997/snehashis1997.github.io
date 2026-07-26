@@ -779,6 +779,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .course-grade.perfect { color: var(--success); }
 
 /* ---------- EDUCATION ---------- */
+.edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .edu-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -868,6 +874,11 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.25rem;
+}
+
+/* ---------- HOBBIES ---------- */
+#hobbies .contact-cards {
+  grid-template-columns: minmax(240px, 320px);
 }
 
 .contact-card {
