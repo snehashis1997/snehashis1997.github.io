@@ -114,11 +114,19 @@ sections.forEach(s => sectionObserver.observe(s));
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxClose = document.getElementById('lightboxClose');
+const galleryImgs = [...document.querySelectorAll('.gallery-item img')];
+let currentGalleryIndex = 0;
 
-document.querySelectorAll('.gallery-item img').forEach(img => {
+function showGalleryImage(index) {
+  currentGalleryIndex = (index + galleryImgs.length) % galleryImgs.length;
+  const img = galleryImgs[currentGalleryIndex];
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt;
+}
+
+galleryImgs.forEach((img, index) => {
   img.addEventListener('click', () => {
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
+    showGalleryImage(index);
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   });
@@ -134,7 +142,10 @@ lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
 document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('active')) return;
   if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') showGalleryImage(currentGalleryIndex + 1);
+  if (e.key === 'ArrowLeft') showGalleryImage(currentGalleryIndex - 1);
 });
 
 /* ---------- Subtle parallax on hero bg ---------- */
