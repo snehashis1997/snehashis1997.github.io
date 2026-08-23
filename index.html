@@ -128,9 +128,22 @@
               <li>Building high-performance inference and analytics pipelines using FastAPI-based backend services, optimized deployment frameworks such as vLLM and TensorRT-LLM, and hardware-accelerated video processing using OpenVINO, CUDA, GStreamer, and Intel DLStreamer across heterogeneous platforms (CPU, GPU, iGPU).</li>
               <li>Architected a large-scale object re-identification (Re-ID) system for CCTV-based surveillance networks, enabling robust cross-camera matching of persons and vehicles across non-overlapping camera views using appearance-embedding and metric-learning techniques for city-scale, multi-camera tracking.</li>
               <li>Design, build, and spearhead video classification models for human behaviour analysis tailored to banking customers, detecting behaviours such as frisking pattern analysis to prevent unauthorized entry, counter-visit interactions, and suspicious activity to support in-branch monitoring and customer analytics.</li>
+              <li>Working on thermal video analytics to detect moving vehicles and humans, where generic pretrained detectors are hard to train reliably due to the lack of large-scale labeled thermal datasets; adopted and adapted <a href="https://github.com/CIVA-Lab/DeepFTSG" target="_blank" rel="noopener">DeepFTSG</a> as the foreground-detection backbone, built a custom UI, and trained the model to produce robust, production-grade results.</li>
+              <li>Deployed the pipeline on a zero-copy, fully GPU-resident NVIDIA DeepStream architecture combining background-modeling (BGM) with the NvOF optical-flow object tracker, alongside custom video-analytics business logic, engineered for maximum FPS and channel count on 10 fps, 720p input streams.</li>
+              <li>Tackled heavy camera shake caused by windy outdoor conditions by building a data augmentation pipeline that synthetically injects camera-shake jitter into the limited available thermal footage, improving detector robustness to real-world vibration without additional data collection.</li>
             </ul>
             <div class="card-tags">
-              <span>LLM</span><span>vLLM</span><span>TensorRT-LLM</span><span>FastAPI</span><span>OpenVINO</span><span>CUDA</span><span>Object Re-ID</span><span>Behaviour Analysis</span><span>Video Classification</span>
+              <span>LLM</span><span>vLLM</span><span>TensorRT-LLM</span><span>FastAPI</span><span>OpenVINO</span><span>CUDA</span><span>Object Re-ID</span><span>Behaviour Analysis</span><span>Video Classification</span><span>DeepStream</span><span>Thermal Imaging</span><span>NvOF Tracker</span><span>BGM</span><span>Data Augmentation</span>
+            </div>
+
+            <div class="card-videos">
+              <p class="card-videos-label">Sample Outputs — Thermal Vehicle &amp; Human Detection</p>
+              <div class="video-grid">
+                <video controls preload="metadata" src="videos/1.mp4"></video>
+                <video controls preload="metadata" src="videos/2.mp4"></video>
+                <video controls preload="metadata" src="videos/3.mp4"></video>
+                <video controls preload="metadata" src="videos/4.mp4"></video>
+              </div>
             </div>
           </div>
         </div>
