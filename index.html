@@ -579,27 +579,44 @@
         </a>
       </div>
 
-      <div class="gallery-grid">
-        <div class="gallery-item"><img src="gallery/gallery-01.webp" alt="Hobby photo 1" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-02.webp" alt="Hobby photo 2" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-03.webp" alt="Hobby photo 3" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-04.webp" alt="Hobby photo 4" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-05.webp" alt="Hobby photo 5" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-06.webp" alt="Hobby photo 6" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-07.webp" alt="Hobby photo 7" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-08.webp" alt="Hobby photo 8" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-09.webp" alt="Hobby photo 9" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-10.webp" alt="Hobby photo 10" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-11.jpeg" alt="Hobby photo 11" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-12.jpeg" alt="Hobby photo 12" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-13.jpeg" alt="Hobby photo 13" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-14.jpeg" alt="Hobby photo 14" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-15.jpeg" alt="Hobby photo 15" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-16.jpeg" alt="Hobby photo 16" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-17.jpeg" alt="Hobby photo 17" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-18.jpeg" alt="Hobby photo 18" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-19.jpeg" alt="Hobby photo 19" loading="lazy" /></div>
-        <div class="gallery-item"><img src="gallery/gallery-20.jpeg" alt="Hobby photo 20" loading="lazy" /></div>
+      <div class="gallery-slider" id="gallerySlider">
+        <div class="gallery-stage">
+          <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="gallery-main">
+            <img src="gallery/gallery-01.webp" alt="Hobby photo 1" id="galleryMainImg" />
+          </div>
+          <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <div class="gallery-caption">
+          <h3 id="galleryTitle">Hobby photo 1</h3>
+          <p id="galleryCounter">1 / 20</p>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs">
+          <button class="gallery-thumb active" data-src="gallery/gallery-01.webp" data-alt="Hobby photo 1" aria-label="Show photo 1"><img src="gallery/gallery-01.webp" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-02.webp" data-alt="Hobby photo 2" aria-label="Show photo 2"><img src="gallery/gallery-02.webp" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-03.webp" data-alt="Hobby photo 3" aria-label="Show photo 3"><img src="gallery/gallery-03.webp" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-04.webp" data-alt="Hobby photo 4" aria-label="Show photo 4"><img src="gallery/gallery-04.webp" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-05.webp" data-alt="Hobby photo 5" aria-label="Show photo 5"><img src="gallery/gallery-05.webp" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-06.webp" data-alt="Hobby photo 6" aria-label="Show photo 6"><img src="gallery/gallery-06.webp" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-07.webp" data-alt="Hobby photo 7" aria-label="Show photo 7"><img src="gallery/gallery-07.webp" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-08.webp" data-alt="Hobby photo 8" aria-label="Show photo 8"><img src="gallery/gallery-08.webp" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-09.webp" data-alt="Hobby photo 9" aria-label="Show photo 9"><img src="gallery/gallery-09.webp" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-10.webp" data-alt="Hobby photo 10" aria-label="Show photo 10"><img src="gallery/gallery-10.webp" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-11.jpeg" data-alt="Hobby photo 11" aria-label="Show photo 11"><img src="gallery/gallery-11.jpeg" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-12.jpeg" data-alt="Hobby photo 12" aria-label="Show photo 12"><img src="gallery/gallery-12.jpeg" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-13.jpeg" data-alt="Hobby photo 13" aria-label="Show photo 13"><img src="gallery/gallery-13.jpeg" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-14.jpeg" data-alt="Hobby photo 14" aria-label="Show photo 14"><img src="gallery/gallery-14.jpeg" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-15.jpeg" data-alt="Hobby photo 15" aria-label="Show photo 15"><img src="gallery/gallery-15.jpeg" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-16.jpeg" data-alt="Hobby photo 16" aria-label="Show photo 16"><img src="gallery/gallery-16.jpeg" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-17.jpeg" data-alt="Hobby photo 17" aria-label="Show photo 17"><img src="gallery/gallery-17.jpeg" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-18.jpeg" data-alt="Hobby photo 18" aria-label="Show photo 18"><img src="gallery/gallery-18.jpeg" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-19.jpeg" data-alt="Hobby photo 19" aria-label="Show photo 19"><img src="gallery/gallery-19.jpeg" alt="" loading="lazy" /></button>
+          <button class="gallery-thumb" data-src="gallery/gallery-20.jpeg" data-alt="Hobby photo 20" aria-label="Show photo 20"><img src="gallery/gallery-20.jpeg" alt="" loading="lazy" /></button>
+        </div>
       </div>
     </div>
   </section>
@@ -615,7 +632,6 @@
   <!-- ========== LIGHTBOX ========== -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
-    <img src="" alt="" class="lightbox-img" id="lightboxImg" />
   </div>
 
   <script src="script.js"></script>

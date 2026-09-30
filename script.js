@@ -110,42 +110,84 @@ const sectionObserver = new IntersectionObserver(
 
 sections.forEach(s => sectionObserver.observe(s));
 
-/* ---------- Gallery lightbox ---------- */
+/* ---------- Gallery slider + lightbox ---------- */
 const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
 const lightboxClose = document.getElementById('lightboxClose');
-const galleryImgs = [...document.querySelectorAll('.gallery-item img')];
+const gallerySlider = document.getElementById('gallerySlider');
+const galleryHome = gallerySlider.parentElement;
+const galleryMainImg = document.getElementById('galleryMainImg');
+const galleryTitle = document.getElementById('galleryTitle');
+const galleryCounter = document.getElementById('galleryCounter');
+const galleryThumbs = [...document.querySelectorAll('.gallery-thumb')];
 let currentGalleryIndex = 0;
+let galleryInView = false;
+
+function centreActiveThumb() {
+  const thumb = galleryThumbs[currentGalleryIndex];
+  const strip = thumb.parentElement;
+  strip.scrollLeft = thumb.offsetLeft - strip.offsetLeft - (strip.clientWidth - thumb.clientWidth) / 2;
+}
 
 function showGalleryImage(index) {
-  currentGalleryIndex = (index + galleryImgs.length) % galleryImgs.length;
-  const img = galleryImgs[currentGalleryIndex];
-  lightboxImg.src = img.src;
-  lightboxImg.alt = img.alt;
+  currentGalleryIndex = (index + galleryThumbs.length) % galleryThumbs.length;
+  const thumb = galleryThumbs[currentGalleryIndex];
+  const { src, alt } = thumb.dataset;
+
+  galleryMainImg.classList.add('fading');
+  setTimeout(() => {
+    galleryMainImg.src = src;
+    galleryMainImg.alt = alt;
+    galleryMainImg.classList.remove('fading');
+  }, 150);
+
+  galleryTitle.textContent = alt;
+  galleryCounter.textContent = `${currentGalleryIndex + 1} / ${galleryThumbs.length}`;
+  galleryThumbs.forEach(t => t.classList.toggle('active', t === thumb));
+  centreActiveThumb();
 }
 
-galleryImgs.forEach((img, index) => {
-  img.addEventListener('click', () => {
-    showGalleryImage(index);
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
+galleryThumbs.forEach((thumb, index) => {
+  thumb.addEventListener('click', () => showGalleryImage(index));
 });
 
+document.getElementById('galleryPrev').addEventListener('click', () => showGalleryImage(currentGalleryIndex - 1));
+document.getElementById('galleryNext').addEventListener('click', () => showGalleryImage(currentGalleryIndex + 1));
+
+// The lightbox shows the same slider (big image + thumbnail trail), moved into the overlay
+function openLightbox() {
+  lightbox.appendChild(gallerySlider);
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  centreActiveThumb();
+}
+
 function closeLightbox() {
+  galleryHome.appendChild(gallerySlider);
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
+  centreActiveThumb();
 }
+
+galleryMainImg.addEventListener('click', () => {
+  if (!lightbox.classList.contains('active')) openLightbox();
+});
 
 lightboxClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
+
+new IntersectionObserver(
+  ([entry]) => { galleryInView = entry.isIntersecting; },
+  { threshold: 0.3 }
+).observe(gallerySlider);
+
 document.addEventListener('keydown', (e) => {
-  if (!lightbox.classList.contains('active')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowRight') showGalleryImage(currentGalleryIndex + 1);
-  if (e.key === 'ArrowLeft') showGalleryImage(currentGalleryIndex - 1);
+  const inLightbox = lightbox.classList.contains('active');
+  if (!inLightbox && !galleryInView) return;
+  if (e.key === 'Escape' && inLightbox) closeLightbox();
+  if (e.key === 'ArrowRight') { e.preventDefault(); showGalleryImage(currentGalleryIndex + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); showGalleryImage(currentGalleryIndex - 1); }
 });
 
 /* ---------- Subtle parallax on hero bg ---------- */
