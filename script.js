@@ -110,26 +110,52 @@ const sectionObserver = new IntersectionObserver(
 
 sections.forEach(s => sectionObserver.observe(s));
 
-/* ---------- Gallery lightbox ---------- */
+/* ---------- Gallery slider + lightbox ---------- */
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxClose = document.getElementById('lightboxClose');
-const galleryImgs = [...document.querySelectorAll('.gallery-item img')];
+const galleryMainImg = document.getElementById('galleryMainImg');
+const galleryTitle = document.getElementById('galleryTitle');
+const galleryCounter = document.getElementById('galleryCounter');
+const galleryThumbs = [...document.querySelectorAll('.gallery-thumb')];
 let currentGalleryIndex = 0;
 
 function showGalleryImage(index) {
-  currentGalleryIndex = (index + galleryImgs.length) % galleryImgs.length;
-  const img = galleryImgs[currentGalleryIndex];
-  lightboxImg.src = img.src;
-  lightboxImg.alt = img.alt;
+  currentGalleryIndex = (index + galleryThumbs.length) % galleryThumbs.length;
+  const thumb = galleryThumbs[currentGalleryIndex];
+  const { src, alt } = thumb.dataset;
+
+  galleryMainImg.classList.add('fading');
+  setTimeout(() => {
+    galleryMainImg.src = src;
+    galleryMainImg.alt = alt;
+    galleryMainImg.classList.remove('fading');
+  }, 150);
+
+  galleryTitle.textContent = alt;
+  galleryCounter.textContent = `${currentGalleryIndex + 1} / ${galleryThumbs.length}`;
+  galleryThumbs.forEach(t => t.classList.toggle('active', t === thumb));
+
+  // Keep the active thumbnail centred without scrolling the page
+  const strip = thumb.parentElement;
+  strip.scrollLeft = thumb.offsetLeft - strip.offsetLeft - (strip.clientWidth - thumb.clientWidth) / 2;
+
+  lightboxImg.src = src;
+  lightboxImg.alt = alt;
 }
 
-galleryImgs.forEach((img, index) => {
-  img.addEventListener('click', () => {
-    showGalleryImage(index);
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
+galleryThumbs.forEach((thumb, index) => {
+  thumb.addEventListener('click', () => showGalleryImage(index));
+});
+
+document.getElementById('galleryPrev').addEventListener('click', () => showGalleryImage(currentGalleryIndex - 1));
+document.getElementById('galleryNext').addEventListener('click', () => showGalleryImage(currentGalleryIndex + 1));
+
+galleryMainImg.addEventListener('click', () => {
+  lightboxImg.src = galleryMainImg.src;
+  lightboxImg.alt = galleryMainImg.alt;
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
 });
 
 function closeLightbox() {
