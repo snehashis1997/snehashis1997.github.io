@@ -112,13 +112,21 @@ sections.forEach(s => sectionObserver.observe(s));
 
 /* ---------- Gallery slider + lightbox ---------- */
 const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
 const lightboxClose = document.getElementById('lightboxClose');
+const gallerySlider = document.getElementById('gallerySlider');
+const galleryHome = gallerySlider.parentElement;
 const galleryMainImg = document.getElementById('galleryMainImg');
 const galleryTitle = document.getElementById('galleryTitle');
 const galleryCounter = document.getElementById('galleryCounter');
 const galleryThumbs = [...document.querySelectorAll('.gallery-thumb')];
 let currentGalleryIndex = 0;
+let galleryInView = false;
+
+function centreActiveThumb() {
+  const thumb = galleryThumbs[currentGalleryIndex];
+  const strip = thumb.parentElement;
+  strip.scrollLeft = thumb.offsetLeft - strip.offsetLeft - (strip.clientWidth - thumb.clientWidth) / 2;
+}
 
 function showGalleryImage(index) {
   currentGalleryIndex = (index + galleryThumbs.length) % galleryThumbs.length;
@@ -135,13 +143,7 @@ function showGalleryImage(index) {
   galleryTitle.textContent = alt;
   galleryCounter.textContent = `${currentGalleryIndex + 1} / ${galleryThumbs.length}`;
   galleryThumbs.forEach(t => t.classList.toggle('active', t === thumb));
-
-  // Keep the active thumbnail centred without scrolling the page
-  const strip = thumb.parentElement;
-  strip.scrollLeft = thumb.offsetLeft - strip.offsetLeft - (strip.clientWidth - thumb.clientWidth) / 2;
-
-  lightboxImg.src = src;
-  lightboxImg.alt = alt;
+  centreActiveThumb();
 }
 
 galleryThumbs.forEach((thumb, index) => {
@@ -151,27 +153,41 @@ galleryThumbs.forEach((thumb, index) => {
 document.getElementById('galleryPrev').addEventListener('click', () => showGalleryImage(currentGalleryIndex - 1));
 document.getElementById('galleryNext').addEventListener('click', () => showGalleryImage(currentGalleryIndex + 1));
 
-galleryMainImg.addEventListener('click', () => {
-  lightboxImg.src = galleryMainImg.src;
-  lightboxImg.alt = galleryMainImg.alt;
+// The lightbox shows the same slider (big image + thumbnail trail), moved into the overlay
+function openLightbox() {
+  lightbox.appendChild(gallerySlider);
   lightbox.classList.add('active');
   document.body.style.overflow = 'hidden';
-});
+  centreActiveThumb();
+}
 
 function closeLightbox() {
+  galleryHome.appendChild(gallerySlider);
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
+  centreActiveThumb();
 }
+
+galleryMainImg.addEventListener('click', () => {
+  if (!lightbox.classList.contains('active')) openLightbox();
+});
 
 lightboxClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
+
+new IntersectionObserver(
+  ([entry]) => { galleryInView = entry.isIntersecting; },
+  { threshold: 0.3 }
+).observe(gallerySlider);
+
 document.addEventListener('keydown', (e) => {
-  if (!lightbox.classList.contains('active')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowRight') showGalleryImage(currentGalleryIndex + 1);
-  if (e.key === 'ArrowLeft') showGalleryImage(currentGalleryIndex - 1);
+  const inLightbox = lightbox.classList.contains('active');
+  if (!inLightbox && !galleryInView) return;
+  if (e.key === 'Escape' && inLightbox) closeLightbox();
+  if (e.key === 'ArrowRight') { e.preventDefault(); showGalleryImage(currentGalleryIndex + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); showGalleryImage(currentGalleryIndex - 1); }
 });
 
 /* ---------- Subtle parallax on hero bg ---------- */
