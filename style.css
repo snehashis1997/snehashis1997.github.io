@@ -878,6 +878,10 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   gap: 1.25rem;
 }
 
+#contact .container {
+  width: min(1210px, 92%);
+}
+
 /* ---------- HOBBIES ---------- */
 #hobbies .container {
   width: min(1600px, 95%);
