@@ -38,8 +38,6 @@
           <li><strong>VLM analyzer engine.</strong> Each analytic is a carefully written question to Qwen3-VL-8B, served by vLLM with structured (yes/no) output. Video is cut into 20-second clips or 1-fps frames and cropped to user-drawn zones. An event needs a sustained run of "yes" answers in camera time, which keeps false alarms down. Prompts hot-reload, and every answer is logged with the prompt version that produced it.</li>
           <li><strong>Classic CV where it works better.</strong> LoFTR feature matching with RANSAC homography detects removed or displaced objects against a reference frame. SigLIP zero-shot attributes check PPE, hairnets, gloves and suspicious carry-outs on person tracks. Track-based rules handle the two-person rule, entry/exit counting, queue length and wrong-direction walking.</li>
           <li><strong>Natural-language video search.</strong> Operators type questions like "how many people in red shirts near gate 2 after 6 pm?". Four small models answer them: an intent router, an attribute tagger, a time-expression parser, and a narrative summarizer fine-tuned with LoRA from Qwen2.5-0.5B. There is no large-model call at query time, so it runs on CPU or about 3.4 GB of GPU. Held-out accuracy: <strong>99.3%</strong> for intent and <strong>0.998 F1</strong> for 11-slot attribute extraction.</li>
-          <li><strong>Predictive and multi-camera analytics.</strong> A Heat-Risk forecast of which cameras are likely to alert in the coming hours (backtested on a 7-day holdout), convoy detection from license-plate (ANPR) events across cameras, and VIP movement support.</li>
-          <li><strong>Shipping.</strong> The work spans the analyzer microservices, Go API endpoints and web UI screens. Everything is packaged for offline, air-gapped installation on one 32 GB GPU, with model weights kept outside the images so they can be updated on their own.</li>
         </ul>
       </div>
 
@@ -50,7 +48,7 @@
           <li><strong>Security:</strong> asset carry-out, object removal, two-person rule, weapons.</li>
           <li><strong>Operations:</strong> meal headcount, wrong parking, idle equipment.</li>
         </ul>
-        <p class="case-text case-note">Search-assistant figures are from held-out test data, not live site traffic. Heat-Risk, convoy and VIP analytics have been validated on synthetic data so far, with no field results yet.</p>
+        <p class="case-text case-note">Search-assistant figures are from held-out test data, not live site traffic.</p>
       </div>
 
       <div class="timeline-card">
