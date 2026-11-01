@@ -1226,3 +1226,15 @@ footer strong { color: var(--text); }
   border-color: var(--accent);
   color: var(--accent);
 }
+
+/* ---------- CASE STUDY ---------- */
+.case-study { max-width: 900px; padding-top: 2rem; }
+.case-study .timeline-card { margin-top: 1.5rem; }
+.case-study .card-title { margin-bottom: 0.75rem; }
+.case-lede { font-size: 1.1rem; color: var(--text); line-height: 1.7; margin-top: 1rem; }
+.case-meta { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-faint); margin-top: 0.75rem; }
+.case-text { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+.case-note { margin-top: 1rem; font-size: 0.85rem; font-style: italic; }
+
+.skill-group-wide { grid-column: 1 / -1; }
+.skill-group-wide .course-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.75rem; }

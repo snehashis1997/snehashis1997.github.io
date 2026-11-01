@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise Video Intelligence | Snehashis Chatterjee</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230b0f1a%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Arial,sans-serif%27 font-size=%2715%27 font-weight=%27700%27 fill=%27%236c8cff%27 text-anchor=%27middle%27%3ESC%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-container">
+      <a class="nav-logo" href="index.html">SC</a>
+      <ul class="nav-links">
+        <li><a href="index.html#projects">&larr; Back to Portfolio</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container case-study">
+      <h2 class="section-title">Enterprise Video Intelligence for Workplace Safety &amp; Security</h2>
+      <p class="case-lede">Turning existing CCTV into a safety, security and operations system, using vision-language models instead of training a new detector for every use case.</p>
+      <p class="case-meta">Senior Research Engineer, Videonetics Technology Private Limited &middot; Dec 2025 – Present</p>
+
+      <div class="timeline-card">
+        <h3 class="card-title">The problem</h3>
+        <p class="case-text">The client wanted dozens of new analytics across offices, kitchens, parking areas and secured rooms: slips and falls, blocked fire exits, open electrical panels, missing PPE, unattended items, wrong parking, meal-time crowding and more. Training a separate detector for each one would take months of labelling, and many of them (an "obstructed panel", a "wet polished floor") have no public dataset.</p>
+      </div>
+
+      <div class="timeline-card">
+        <h3 class="card-title">What I did</h3>
+        <ul class="card-list">
+          <li><strong>VLM analyzer engine.</strong> Each analytic is a carefully written question to Qwen3-VL-8B, served by vLLM with structured (yes/no) output. Video is cut into 20-second clips or 1-fps frames and cropped to user-drawn zones. An event needs a sustained run of "yes" answers in camera time, which keeps false alarms down. Prompts hot-reload, and every answer is logged with the prompt version that produced it.</li>
+          <li><strong>Classic CV where it works better.</strong> LoFTR feature matching with RANSAC homography detects removed or displaced objects against a reference frame. SigLIP zero-shot attributes check PPE, hairnets, gloves and suspicious carry-outs on person tracks. Track-based rules handle the two-person rule, entry/exit counting, queue length and wrong-direction walking.</li>
+          <li><strong>Natural-language video search.</strong> Operators type questions like "how many people in red shirts near gate 2 after 6 pm?". Four small models answer them: an intent router, an attribute tagger, a time-expression parser, and a narrative summarizer fine-tuned with LoRA from Qwen2.5-0.5B. There is no large-model call at query time, so it runs on CPU or about 3.4 GB of GPU. Held-out accuracy: <strong>99.3%</strong> for intent and <strong>0.998 F1</strong> for 11-slot attribute extraction.</li>
+          <li><strong>Predictive and multi-camera analytics.</strong> A Heat-Risk forecast of which cameras are likely to alert in the coming hours (backtested on a 7-day holdout), convoy detection from license-plate (ANPR) events across cameras, and VIP movement support.</li>
+          <li><strong>Shipping.</strong> The work spans the analyzer microservices, Go API endpoints and web UI screens. Everything is packaged for offline, air-gapped installation on one 32 GB GPU, with model weights kept outside the images so they can be updated on their own.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-card">
+        <h3 class="card-title">Scope</h3>
+        <ul class="card-list">
+          <li><strong>Workplace safety:</strong> slip/fall, PPE, hygiene, blocked fire exits, electrical panel hazards.</li>
+          <li><strong>Security:</strong> asset carry-out, object removal, two-person rule, weapons.</li>
+          <li><strong>Operations:</strong> meal headcount, wrong parking, idle equipment.</li>
+        </ul>
+        <p class="case-text case-note">Search-assistant figures are from held-out test data, not live site traffic. Heat-Risk, convoy and VIP analytics have been validated on synthetic data so far, with no field results yet.</p>
+      </div>
+
+      <div class="timeline-card">
+        <h3 class="card-title">What I learned</h3>
+        <ul class="card-list">
+          <li>Designing prompts as specifications: precise, versioned and testable.</li>
+          <li>When a VLM beats a trained detector and when it doesn't. Geometry and matching problems went to LoFTR instead.</li>
+          <li>Making AI events trustworthy through temporal consistency rules rather than single-frame confidence.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-card">
+        <h3 class="card-title">Tech</h3>
+        <div class="card-tags">
+          <span>Python</span><span>Go</span><span>TypeScript</span><span>Qwen3-VL</span><span>vLLM</span><span>SigLIP</span><span>LoFTR</span><span>DistilBERT</span><span>Qwen2.5 + LoRA</span><span>NVIDIA DeepStream</span><span>CUDA</span><span>MongoDB</span><span>Docker</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Designed &amp; Built by <strong>Snehashis Chatterjee</strong></p>
+      <p class="footer-sub">Senior Research Engineer | Computer Vision | Deep Learning</p>
+    </div>
+  </footer>
+
+</body>
+</html>
